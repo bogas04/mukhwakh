@@ -1,0 +1,11 @@
+@font-face { font-family: gurmukhi_heavy; src: url('../fonts/gurmukhi_heavy.ttf'); }
+
+.gurakhr {
+  font-family: gurmukhi_heavy;
+}
+.footer {
+  padding-bottom: 20px;
+}
+.huge-font {
+  font-size: 2em;
+}
