@@ -14,7 +14,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "babel-node index",
+    "start": "cd public && npm i && cd ../ && babel-node index",
     "devstart": "nodemon index"
   },
   "repository": {
