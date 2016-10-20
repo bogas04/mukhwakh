@@ -1,8 +1,13 @@
 'use strict';
 
+const URLs = {
+  github: `https://github.com/bogas04/mukhwakh`,
+  source: `http://old.sgpc.net/hukumnama/jpeg%20hukamnama/hukamnama.pdf`,
+  api: `/api`,
+};
 const head = ({ title = 'Mukhwakh' }) => `
 <head>
-  <title>☬ ${title}</title>
+  <title>${title}</title>
   <link rel="stylesheet" href="/node_modules/bootswatch/simplex/bootstrap.min.css" />
   <link rel="stylesheet" href="/css/style.css" />
   <link rel="icon" type="image/png" href="/favicon.ico" />
@@ -14,9 +19,10 @@ const footer = () => `
   <hr />
   <div class="container-fluid footer">
     <ul class="nav nav-pills">
-      <li><a href="https://github.com/bogas04/mukhwakh" target="_blank">&copy; ${new Date().getFullYear()} Mukhwak</a></li>
-      <li><a href="/api" target="_blank">Developer</a></li>
-      <li><a href="https://github.com/bogas04/mukhwak/issues/new" target="_blank">Report Issue</a></li>
+      <li><a target="_blank" href="${URLs.github}">&copy; ${new Date().getFullYear()} Mukhwak</a></li>
+      <li><a target="_blank" href="${URLs.api}">Developer</a></li>
+      <li><a target="_blank" href="${URLs.github}/issues/new">Report Issue</a></li>
+      <li><a target="_blank" href="${URLs.source}">Hukamnama Source</a></li>
     </ul>
   </div>
 `;
@@ -46,8 +52,8 @@ module.exports = ({ data, error = false, err = {} }) => error
         <div class="huge-font gurakhr">${data.gurakhr}</div>
       </div>
       <h3>Translations</h3>
-      <div class="col-md-6 huge-font gurakhr">${data.punjabi}</div>
-      <div class="col-md-6 huge-font">${data.english}</div>
+      <div class="col-xl-6 huge-font gurakhr">${data.punjabi}</div>
+      <div class="col-xl-6 huge-font">${data.english}</div>
     </div>
     ${footer()}
   </body>
