@@ -40,16 +40,17 @@ module.exports = ({ data, error = false, err = {} }) => error
     ${footer()}
   </body>
 </html>`)
-  : (`
+          : (`
 <!doctype>
 <html>
   ${head({ title: `Mukhwak - ${data.ang}` })}
   <body>
     <div class="container">
       <h1> ☬ Aj Da Mukhwak <small>Ang ${data.ang}</small></h1>
+        <h4>${data.date}</h4>
       <hr /> 
       <div class="jumbotron">
-        <div class="huge-font gurakhr">${data.gurakhr}</div>
+        <div class="huge-font gurakhr">${data.gurbani}</div>
       </div>
       <h3>Translations</h3>
       <div class="col-xl-6 huge-font gurakhr">${data.punjabi}</div>
