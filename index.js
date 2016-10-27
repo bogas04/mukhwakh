@@ -1,11 +1,13 @@
 'use strict';
 
 const express = require('express');
+const cors = require('cors');
 const hukamnama = require('hukamnama-json');
 
 const template = require('./template');
 
 const server = express() 
+  .use(cors())
   .use(express.static(`${__dirname}/public`))
   .get('/api', (req, res) => hukamnama()
     .then(data => res.status(200).json(Object.assign({}, { data }, { error: false })))
