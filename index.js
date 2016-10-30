@@ -1,21 +1,25 @@
 'use strict';
 
-const express = require('express');
-const cors = require('cors');
-const hukamnama = require('hukamnama-json');
+var express = require('express');
+var cors = require('cors');
+var hukamnama = require('hukamnama-json');
 
-const template = require('./template');
+var template = require('./template');
 
-const server = express() 
-  .use(cors())
-  .use(express.static(`${__dirname}/public`))
-  .get('/api', (req, res) => hukamnama()
-    .then(data => res.status(200).json(Object.assign({}, { data }, { error: false })))
-    .catch(e => res.status(200).json({ error: true, }))
-  )
-  .get('/', (req, res) => hukamnama()
-    .then(data => res.send(template({ data })))
-    .catch(err => res.send(template({ error: true, err })))
-  )
-  .get('*', (req, res) => res.send(template({ error: true, err: 404 })))
-  .listen(process.env.PORT || 8080, () => console.log('Server running on port: ' + server.address().port));
+var server = express().use(cors()).use(express.static(__dirname + '/public')).get('/api', function (req, res) {
+  return hukamnama().then(function (data) {
+    return res.status(200).json(Object.assign({}, { data: data }, { error: false }));
+  }).catch(function (e) {
+    return res.status(200).json({ error: true });
+  });
+}).get('/', function (req, res) {
+  return hukamnama().then(function (data) {
+    return res.send(template({ data: data }));
+  }).catch(function (err) {
+    return res.send(template({ error: true, err: err }));
+  });
+}).get('*', function (req, res) {
+  return res.send(template({ error: true, err: 404 }));
+}).listen(process.env.PORT || 8080, function () {
+  return console.log('Server running on port: ' + server.address().port);
+});

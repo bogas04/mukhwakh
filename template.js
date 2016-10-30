@@ -1,62 +1,25 @@
 'use strict';
 
-const URLs = {
-  github: `https://github.com/bogas04/mukhwakh`,
-  source: `http://old.sgpc.net/hukumnama/jpeg%20hukamnama/hukamnama.pdf`,
-  api: `/api`,
+var URLs = {
+  github: 'https://github.com/bogas04/mukhwakh',
+  source: 'http://old.sgpc.net/hukumnama/jpeg%20hukamnama/hukamnama.pdf',
+  api: '/api'
 };
-const head = ({ title = 'Mukhwakh' }) => `
-<head>
-  <title>${title}</title>
-  <link rel="stylesheet" href="/node_modules/bootswatch/simplex/bootstrap.min.css" />
-  <link rel="stylesheet" href="/css/style.css" />
-  <link rel="icon" type="image/png" href="/favicon.ico" />
-  <meta charset="utf-8" />
-</head>
-`;
+var head = function head(_ref) {
+  var _ref$title = _ref.title,
+      title = _ref$title === undefined ? 'Mukhwakh' : _ref$title;
+  return '\n<head>\n  <title>' + title + '</title>\n  <link rel="stylesheet" href="/node_modules/bootswatch/simplex/bootstrap.min.css" />\n  <link rel="stylesheet" href="/css/style.css" />\n  <link rel="icon" type="image/png" href="/favicon.ico" />\n  <meta charset="utf-8" />\n</head>\n';
+};
 
-const footer = () => `
-  <hr />
-  <div class="container-fluid footer">
-    <ul class="nav nav-pills">
-      <li><a target="_blank" href="${URLs.github}">&copy; ${new Date().getFullYear()} Mukhwak</a></li>
-      <li><a target="_blank" href="${URLs.api}">Developer</a></li>
-      <li><a target="_blank" href="${URLs.github}/issues/new">Report Issue</a></li>
-      <li><a target="_blank" href="${URLs.source}">Hukamnama Source</a></li>
-    </ul>
-  </div>
-`;
+var footer = function footer() {
+  return '\n  <hr />\n  <div class="container-fluid footer">\n    <ul class="nav nav-pills">\n      <li><a target="_blank" href="' + URLs.github + '">&copy; ' + new Date().getFullYear() + ' Mukhwak</a></li>\n      <li><a target="_blank" href="' + URLs.api + '">Developer</a></li>\n      <li><a target="_blank" href="' + URLs.github + '/issues/new">Report Issue</a></li>\n      <li><a target="_blank" href="' + URLs.source + '">Hukamnama Source</a></li>\n    </ul>\n  </div>\n';
+};
 
-module.exports = ({ data, error = false, err = {} }) => error
-  ? (`
-<!doctype>
-<html>
-  ${head({ title: 'Mukhwak - Error!' })}
-  <body>
-    <div class="container">
-      <h1>Oops, we've some bad news!</h1>
-      <div class="jumbotron">${ err === 404 ? `Page not found!` : JSON.stringify(err, null, 2)}</div>
-    </div>
-    ${footer()}
-  </body>
-</html>`)
-          : (`
-<!doctype>
-<html>
-  ${head({ title: `Mukhwak - ${data.ang}` })}
-  <body>
-    <div class="container">
-      <h1> ☬ Aj Da Mukhwak <small>Ang ${data.ang}</small></h1>
-        <h4>${data.date}</h4>
-      <hr /> 
-      <div class="jumbotron">
-        <div class="huge-font gurakhr">${data.gurbani}</div>
-      </div>
-      <h3>Translations</h3>
-      <div class="col-xl-6 huge-font gurakhr">${data.punjabi}</div>
-      <div class="col-xl-6 huge-font">${data.english}</div>
-    </div>
-    ${footer()}
-  </body>
-</html> 
-`);
+module.exports = function (_ref2) {
+  var data = _ref2.data,
+      _ref2$error = _ref2.error,
+      error = _ref2$error === undefined ? false : _ref2$error,
+      _ref2$err = _ref2.err,
+      err = _ref2$err === undefined ? {} : _ref2$err;
+  return error ? '\n<!doctype>\n<html>\n  ' + head({ title: 'Mukhwak - Error!' }) + '\n  <body>\n    <div class="container">\n      <h1>Oops, we\'ve some bad news!</h1>\n      <div class="jumbotron">' + (err === 404 ? 'Page not found!' : JSON.stringify(err, null, 2)) + '</div>\n    </div>\n    ' + footer() + '\n  </body>\n</html>' : '\n<!doctype>\n<html>\n  ' + head({ title: 'Mukhwak - ' + data.ang }) + '\n  <body>\n    <div class="container">\n      <h1> \u262C Aj Da Mukhwak <small>Ang ' + data.ang + '</small></h1>\n        <h4>' + data.date + '</h4>\n      <hr /> \n      <div class="jumbotron">\n        <div class="huge-font gurakhr">' + data.gurbani + '</div>\n      </div>\n      <h3>Translations</h3>\n      <div class="col-xl-6 huge-font gurakhr">' + data.punjabi + '</div>\n      <div class="col-xl-6 huge-font">' + data.english + '</div>\n    </div>\n    ' + footer() + '\n  </body>\n</html> \n';
+};
